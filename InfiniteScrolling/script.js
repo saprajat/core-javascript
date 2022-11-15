@@ -1,5 +1,5 @@
 const container = document.getElementById('container');
-const loading = document.querySelector('.loading')
+const loading = document.querySelector('.loading');
 
 let pageNumber = 1;
 
