@@ -11,20 +11,19 @@ const clearDataFromDom = () => {
     blogContent.innerHTML = '';
 }
 
-
 const fetchApi = async() => {
     const resp = await fetch(`https://jsonplaceholder.typicode.com/posts`);
     const data = await resp.json();
     postData.push(...data);
     postData.pop();
     createPagination(postData);
-    addDataToDom(postData,);
+    addDataToDom(postData);
 }
 
 const addDataToDom = (data,currentPage=1,pageSize=10) => {
     let start = (currentPage - 1) * pageSize;
     let end = currentPage * pageSize;
-    data.slice(start,end).filter(({title,body,id})=>{
+    data.slice(start,end).map(({title,body,id})=>{
         const div = document.createElement('div');
         div.classList.add('blog-post');
         const h2 = document.createElement('h2');
@@ -36,6 +35,7 @@ const addDataToDom = (data,currentPage=1,pageSize=10) => {
         div.append(pEl);
         blogContent.append(div);
     })
+    loading.classList.remove('show');
 }
 
 const createPagination = (postData) => {
@@ -46,8 +46,12 @@ const createPagination = (postData) => {
         const liEl = document.createElement('li');
         liEl.innerText = i;
         paginationEl.append(liEl);
-    }
-    
+    }   
+}
+
+const showLoading = (pageNumber) => {
+    loading.classList.add('show');
+    setTimeout(() => addDataToDom(postData,pageNumber),1000);
 }
 
 paginationEl.addEventListener('click', event => { 
@@ -59,7 +63,7 @@ paginationEl.addEventListener('click', event => {
             behavior: 'smooth',
           });
         clearDataFromDom();
-        addDataToDom(postData,updatePageNumber,pageSize);
+        showLoading(updatePageNumber)
     }
 });
 

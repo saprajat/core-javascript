@@ -59,7 +59,6 @@ ul.pagination li:last-child{
 
 }
 
-
 .loading.show{
     opacity: 1;
     display: flex;
