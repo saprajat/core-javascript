@@ -50,7 +50,7 @@ ul.pagination li:last-child{
 
 .loading{
     opacity: 0;
-    display: flex;
+    display: none;
     position: relative;
     transition: opacity .3s ease-in;
     height: 200px;
@@ -62,6 +62,7 @@ ul.pagination li:last-child{
 
 .loading.show{
     opacity: 1;
+    display: flex;
 }
 
 .ball{
