@@ -17,7 +17,6 @@ function blurring(){
     bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`;
 }
 
-
 const scale = (load,load_min,load_max,opacity_min,opacity_max) => {
     return ( (load-load_min ) * (opacity_max - opacity_min)) / (load_max - load_min) + opacity_min;
 }
